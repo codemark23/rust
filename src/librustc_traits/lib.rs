@@ -33,8 +33,11 @@ mod dropck_outlives;
 mod evaluate_obligation;
 mod normalize_projection_ty;
 mod normalize_erasing_regions;
-mod util;
 pub mod lowering;
+mod type_op_eq;
+mod type_op_normalize;
+mod type_op_prove_predicate;
+mod type_op_subtype;
 
 use rustc::ty::query::Providers;
 
@@ -48,6 +51,13 @@ pub fn provide(p: &mut Providers) {
         program_clauses_for: lowering::program_clauses_for,
         program_clauses_for_env: lowering::program_clauses_for_env,
         evaluate_obligation: evaluate_obligation::evaluate_obligation,
+        type_op_eq: type_op_eq::type_op_eq,
+        type_op_prove_predicate: type_op_prove_predicate::type_op_prove_predicate,
+        type_op_subtype: type_op_subtype::type_op_subtype,
+        type_op_normalize_ty: type_op_normalize::type_op_normalize_ty,
+        type_op_normalize_predicate: type_op_normalize::type_op_normalize_predicate,
+        type_op_normalize_fn_sig: type_op_normalize::type_op_normalize_fn_sig,
+        type_op_normalize_poly_fn_sig: type_op_normalize::type_op_normalize_poly_fn_sig,
         ..*p
     };
 }
